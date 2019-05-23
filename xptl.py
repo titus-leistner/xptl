@@ -6,7 +6,7 @@ import copy
 usage = """
 Usage: python xptl.py INPUT [BATCH_CMD] [JOB_FILE]
 
-INPUT       JSON file with command line parameters. Objects inside of objects are interpreted as new experiments and inherit parameters of parent. Each element of an array starts a new experiment. Use '"_exec": false' to prevent a specific object in the inheritence hierarchie from being executed.
+INPUT       JSON file with command line parameters. Objects inside of objects are interpreted as new experiments and inherit parameters of parent. Each element of an array starts a new experiment. Use '"_exec": false' to prevent a specific object in the inheritence hierarchie from being executed. See https://github.com/titus-leistner/xptl for an exemplary JSON file.
         
 BATCH_CMD   Command to schedule a job. Default is "sbatch" for SLURM
 
