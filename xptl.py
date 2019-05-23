@@ -25,10 +25,13 @@ def parse_args(data):
     excs = []
 
     # parse dict
+    # parse children
+    childs = []
     for k, v in data.items():
         if isinstance(v, dict):
             # recursion for child node
             child = copy.deepcopy(v)
+            childs.append(k)
 
             # inherit pairs from parent
             for k, v in data.items():
@@ -36,7 +39,13 @@ def parse_args(data):
                     child[k] = v
             excs += parse_args(child)
 
-        elif isinstance(v, list):
+    # remove children from dict
+    for child in childs:
+        del data[child]
+
+    # parse lists
+    for k, v in data.items():
+        if isinstance(v, list):
             # iterate over list for one parameter
             for e in v:
                 child = copy.deepcopy(data)
