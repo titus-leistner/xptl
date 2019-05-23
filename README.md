@@ -1,10 +1,10 @@
 # xptl
 Experiment Tool for Hyper Parameter Searches
 
-# Requirements
+## Requirements
 * Python 3
 
-# Usage
+## Usage
 To define your command line arguments, create a JSON file. Here is an example:
 ```json
 {
