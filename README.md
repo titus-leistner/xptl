@@ -21,6 +21,7 @@ To define your command line arguments, create a JSON file. Here is an example:
 }
 ```
 The batch size is in the root object, therefore it is the same for all experiments in this example.
+As this object should not launch an experiment, we add `"_exec": false`.
 However, we want to try two different learning rates. We define `"lr"` as an array, which means that one experiment per element should be launched.
 As we also want to try two different loss functions, we define two child objects. Both inherit the `"bs"` parameter, but define a different `"loss"` parameter. For the MSE loss we notice that our learning rate is way too high, we therefore override the inherited `"lr"` parameter and try three different values.
 
