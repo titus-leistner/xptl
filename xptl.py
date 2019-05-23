@@ -73,7 +73,11 @@ def parse_args(data):
             args += f' --{k}={v}'
             path += f'_{k}={v}'
 
+    # format path, omit path seperators
     path = path[1:]
+    path = '-'.join(path.split(os.sep))
+
+
     args = f'{path} {args}'
     excs.append(args)
 
