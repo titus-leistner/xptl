@@ -100,7 +100,7 @@ def parse_args(data):
 
     prefix = data.get(f'{META}_{PREFIX}', '')
     if prefix:
-        path = f'{prefix}{SPLIT}{path}'
+        path = f'{"_".join(prefix.split())}{SPLIT}{path}'
 
     args = f'{path} {args}'
 
