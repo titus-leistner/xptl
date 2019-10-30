@@ -66,7 +66,7 @@ sbatch -J L1_Experiment%training_learning_rate=0.01%training_batch_size=128%trai
 
 sbatch -J MSE_Experiment%training_learning_rate=0.0001%training_batch_size=128%training_loss=MSE job.sh MSE_Experiment%training_learning_rate=0.0001%training_batch_size=128%training_loss=MSE  --training_learning_rate=0.0001 --training_batch_size=128 --training_loss=MSE
 ```
-The script generates a job name, containing all parametes without spaces. Optionally a prefix to this jobname can be defined as `prefix` in the `[meta]` section. The `-J` argument passes this name to your scheduler.
+The script generates a job name, containing all parameters without spaces. Optionally a prefix to this jobname can be defined as `prefix` in the `[meta]` section. The `-J` argument passes this name to your scheduler.
 It is also passed to your job script as a first argument followed by all other hyperparameters as additional arguments.
 
 An exemplary job file could look like this:
