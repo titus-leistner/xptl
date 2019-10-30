@@ -4,6 +4,12 @@ Experiment Tool for Hyper Parameter Searches
 ## Requirements
 * Python 3
 
+## Installation
+You can install the package directly from GitHub using pip:
+```sh
+pip install git+https://github.com/titus-leistner/xptl.git
+```
+
 ## Usage
 To define your command line arguments, create one or several ini-files. Here is an example:
 ```ini
@@ -50,7 +56,7 @@ As our "parent" ini-file should not execute an experiment, we add `execute=no`.
 
 To run your experiments, use the following syntax:
 ```sh
-python xptl.py INPUT [BATCH_CMD] [JOB_FILE]
+xptl INPUT [BATCH_CMD] [JOB_FILE]
 ```
 INPUT is the path to your ini-file or a directory containing ini-files. BATCH_CMD is the command that queues a job for your scheduler. Default is `sbatch` for SLURM. JOB_FILE is your job script. Default is `job.sh`.
 
