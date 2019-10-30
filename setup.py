@@ -21,7 +21,7 @@ setup(
             'xptl=xptl.cli:main',
         ],
     },
-    python_requires='>=3.7',
+    python_requires='>=3.6',
     license="GNU General Public License v3",
     packages=find_packages(include=['xptl']),
     install_requires=[],
