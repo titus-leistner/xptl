@@ -2,7 +2,7 @@
 Experiment Tool for Hyper Parameter Searches
 
 ## Requirements
-* Python 3
+* Python 3.7
 
 ## Installation
 You can install the package directly from GitHub using pip:
