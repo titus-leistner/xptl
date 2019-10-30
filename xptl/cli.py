@@ -101,7 +101,8 @@ def parse_args(data):
     prefix = data.get(f'{META}_{PREFIX}', '')
     if prefix:
         path = f'{"_".join(prefix.split())}{SPLIT}{path}'
-
+    
+    path = path[:255]
     args = f'{path} {args}'
 
     return args
@@ -129,7 +130,7 @@ def run_job(fname, batch, job):
 
     args = parse_args(data)
 
-    name = args.split()[0][:255]
+    name = args.split()[0]
     cmd = f'{job} {args}'
 
     if batch:
