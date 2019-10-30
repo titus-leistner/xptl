@@ -129,7 +129,7 @@ def run_job(fname, batch, job):
 
     args = parse_args(data)
 
-    name = args.split()[0]
+    name = args.split()[0][:255]
     cmd = f'{job} {args}'
 
     if batch:
