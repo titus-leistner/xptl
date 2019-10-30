@@ -14,7 +14,7 @@ INPUT is the path to your ini-file or a directory containing ini-files. BATCH_CM
 Using the script on our exemplary ini-files runs the following commands:
 ```sh
 ```
-The script generates a job name, containing all parametes without spaces. The `-J` argument passes this name to your scheduler.
+The script generates a job name, containing all parametes without spaces. Optionally a prefix to this jobname can be defined as `prefix` in the `[meta]` section. The `-J` argument passes this name to your scheduler.
 It is also passed to your job script as a first argument followed by all other hyperparameters as additional arguments.
 
 An exemplary job file could look like this:
