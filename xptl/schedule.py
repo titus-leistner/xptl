@@ -5,7 +5,7 @@ import configparser
 import copy
 
 usage = """
-Usage: xptl INPUT [BATCH_CMD] [JOB_FILE]
+Usage: xptl-schedule INPUT [BATCH_CMD] [JOB_FILE]
 
 INPUT       An ini-style config file with commandline parameters. The config file can inherit from other config files by setting the parent=relative/path/to/parent.ini in the [meta]-section. See https://github.com/titus-leistner/xptl for examples.
         

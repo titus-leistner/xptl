@@ -19,7 +19,7 @@ setup(
     description="Experiment Tool for Hyper Parameter Searches",
     entry_points={
         'console_scripts': [
-            'xptl=xptl.cli:main',
+            'xptl-schedule=xptl.schedule:main',
         ],
     },
     python_requires='>=3.6',
