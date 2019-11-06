@@ -9,10 +9,10 @@ class Canvas():
                  (0x04, 0x20),
                  (0x40, 0x80))
 
-    color_map = ('\033[39m', '\033[31m', '\033[32m', '\033[33m',
-                 '\033[34m', '\033[35m', '\033[36m', '\033[37m',
-                 '\033[90m', '\033[91m', '\033[92m', '\033[93m',
-                 '\033[94m', '\033[95m', '\033[96m', '\033[97m')
+    color_map = ('\033[39m', '\033[31m', '\033[36m', '\033[33m',
+                 '\033[32m', '\033[35m', '\033[34m', '\033[37m',
+                 '\033[90m', '\033[91m', '\033[96m', '\033[93m',
+                 '\033[92m', '\033[95m', '\033[94m', '\033[97m')
 
     def __init__(self, rows, cols):
         """
@@ -48,10 +48,13 @@ class Canvas():
 
         :return: transformed (x, y)
         """
-        h_dots = self.rows * 4 - 1
-        w_dots = self.cols * 2 - 1
+        h_dots = self.rows * 4 - 4
+        w_dots = self.cols * 2 - 2
 
-        return int(round(x * w_dots + 0.5)), int(round((1.0 - y) * h_dots - 1.5))
+        x = int(round(x * w_dots + 0.5))
+        y = int(round((1.0 - y) * h_dots + 1.0))
+
+        return x, y
 
     def set(self, x, y, color=0):
         """

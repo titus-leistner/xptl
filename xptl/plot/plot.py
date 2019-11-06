@@ -5,11 +5,11 @@ import math
 from .canvas import Canvas
 
 usage = """
-Usage: xptl-plot INPUT [COLUMS]
+Usage: xptl-plot INPUT [COLUMNS]
 
-INPUT       csv-file with one header line followed by comma-seperated floats
+INPUT       csv-file with one header line followed by comma-separated floats
 
-COLUMNS      comma-seperated list of y-columns csv-file to plot. E.g. 2,4,5
+COLUMNS     comma-separated list of y-columns csv-file to plot. E.g. 2,4,5
 """
 
 
@@ -65,30 +65,47 @@ def main():
 
     data = []
     headers = []
+    split = None
+
     with open(fname, 'r', newline='') as f:
-        headers = f.readline().rstrip('\n').split(',')
+        headers = f.readline().rstrip('\n')
+
+        # split at commas or semicolon if it appears
+        if ';' in headers:
+            split = ';'
+        elif ',' in headers:
+            split = ','
+
+        headers = headers.split(split)
 
         data = [[] for i in range(len(headers))]
         for l in f:
-            for i, f in enumerate(l.strip('\n').split(',')):
-                data[i].append(float(f))
+            for i, f in enumerate(l.strip('\n').split(split)):
+                try:
+                    data[i].append(float(f))
+                except ValueError:
+                    data[i].append(0.0)
 
     x_axis = data[0]
+    x_header = headers[0]
     headers = headers[1:]
     y_axes = data[1:]
 
     # only include some axes
     if cols != 'all':
-        y_axes = [y_axes[int(i) - 1] for i in cols.split(',')]
-        headers = [headers[int(i) - 1] for i in cols.split(',')]
+        cols = [int(col) - 1 for col in cols.split(',')]
+        if min(cols) < 0 or max(cols) >= len(headers):
+            print('Error: the provided columns are out of range!')
+            exit(1)
+
+        y_axes = [y_axes[i] for i in cols]
+        headers = [headers[i] for i in cols]
 
     # get data interval
     x_min = min(x_axis)
-    x_min = min(x_min, 0.0)
     x_max = max(x_axis)
 
     y_min = min(min(y_axes))
-    y_min = min(y_min, 0.0)
     y_max = max(max(y_axes))
 
     def normalize(x, y):
@@ -107,20 +124,12 @@ def main():
 
     if y_min != 0.0:
         y_digits = max(y_digits, int(math.log10(abs(y_min))))
-    y_digits += 6
-
+    y_digits += 7
 
     h, w = get_terminal_size()
     w -= y_digits + 2
     h = min(w // (2 * ASPECT), h)
     canvas = Canvas(h, w)
-
-    # plot axes
-    x0, y0 = normalize(0.0, 0.0)
-    x1, y1 = normalize(0.0, y_max)
-    x2, y2 = normalize(x_max, 0.0)
-    #canvas.line(x0, y0, x1, y1)
-    #canvas.line(x0, y0, x2, y2)
 
     # plot graphs
     color = 1
@@ -133,24 +142,20 @@ def main():
 
         color += 1
 
-    print(canvas)
-
-
-
     # print axis numbers
     y = y_max
     for row in canvas.get_rows():
-        y -= (y_max - y_min) / h
-        print(('{:' + str(y_digits) + '.4f} \u2524').format(y) + row)
+        print(('{:' + str(y_digits) + '.5f} \u2524').format(y) + row)
+        y -= (y_max - y_min) / (h - 1)
 
     print(y_digits * ' ' + ' \u2514\u252c', end='')
-    print((w - 2) * '\u2500'+ '\u252c')
-    
+    print((w - 2) * '\u2500' + '\u252c')
+
     print(y_digits * ' ', end='')
-    
-    x_label = f'  {x_min:<10.4f} '
+
+    x_label = f'  {x_min:<10} '
     w_remain = w - len(x_label) + 2
-    x_label += '{:' + str(w_remain) + '.4f}'
+    x_label += '{:' + str(w_remain) + '}'
     x_label = x_label.format(x_max)
     print(x_label)
 
@@ -160,9 +165,11 @@ def main():
     print((y_digits + 2) * ' ', end='')
     vertical = chr(
         (canvas.pixel_map[1][0] | canvas.pixel_map[1][1]) + canvas.offset)
+    vertical += chr(canvas.pixel_map[1][0] + canvas.offset)
 
+    print(f'x-axis: {x_header}   y-axis: ', end='')
     for header in headers:
-        print(f'{canvas.color_map[color]}{vertical}{header}   ', end='')
+        print(f'{canvas.color_map[color]}{vertical}{header}    ', end='')
         color += 1
     print(canvas.color_map[0])
 

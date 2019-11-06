@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='xptl',
-    version='0.2.1',
+    version='0.3',
     author="Titus Leistner",
     author_email='research@titus-leistner.de',
     classifiers=[
@@ -20,6 +20,7 @@ setup(
     entry_points={
         'console_scripts': [
             'xptl-schedule=xptl.schedule:main',
+            'xptl-plot=xptl.plot.plot:main'
         ],
     },
     python_requires='>=3.6',
