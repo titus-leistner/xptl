@@ -25,7 +25,7 @@ setup(
     },
     python_requires='>=3.6',
     license="GNU General Public License v3",
-    packages=find_packages(),
+    packages=['xptl', 'xptl.plot'],
     install_requires=[],
     setup_requires=[],
     url='https://github.com/titus-leistner/xptl',
