@@ -51,7 +51,7 @@ class Canvas():
         h_dots = self.rows * 4 - 1
         w_dots = self.cols * 2 - 1
 
-        return int(round(x * w_dots)), int(round((1.0 - y) * h_dots))
+        return int(round(x * w_dots + 0.5)), int(round((1.0 - y) * h_dots - 1.5))
 
     def set(self, x, y, color=0):
         """
