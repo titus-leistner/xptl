@@ -56,7 +56,7 @@ As our "parent" ini-file should not execute an experiment, we add `execute=no`.
 
 To run your experiments, use the following syntax:
 ```sh
-xptl INPUT [BATCH_CMD] [JOB_FILE]
+xptl-schedule INPUT [BATCH_CMD] [JOB_FILE]
 ```
 INPUT is the path to your ini-file or a directory containing ini-files. BATCH_CMD is the command that queues a job for your scheduler. Default is `sbatch` for SLURM. JOB_FILE is your job script. Default is `job.sh`.
 
