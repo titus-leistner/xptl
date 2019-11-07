@@ -2,13 +2,12 @@ import sys
 import string
 import os
 import configparser
-import copy
 
 usage = """
 Usage: xptl-schedule INPUT [BATCH_CMD] [JOB_FILE]
 
 INPUT       An ini-style config file with commandline parameters. The config file can inherit from other config files by setting the parent=relative/path/to/parent.ini in the [meta]-section. See https://github.com/titus-leistner/xptl for examples.
-        
+
 BATCH_CMD   Command to schedule a job. Default is "sbatch" for SLURM
 
 JOB_FILE    The job script. Default is "job.sh"
@@ -17,8 +16,9 @@ JOB_FILE    The job script. Default is "job.sh"
 META = 'meta'
 PARENT = 'parent'
 PREFIX = 'prefix'
+NAME = 'name'
 EXECUTE = 'execute'
-SPLIT = '%'
+SPLIT = '-'
 
 
 def parse_ini(fname):
@@ -47,7 +47,7 @@ def parse_ini(fname):
         for key in config[section]:
             data[f'{section}_{key}'] = config[section][key]
 
-    if not f'{META}_{EXECUTE}' in data.keys():
+    if f'{META}_{EXECUTE}' not in data.keys():
         data[f'{META}_{EXECUTE}'] = 'yes'
 
     # load parent if necessary
@@ -98,10 +98,15 @@ def parse_args(data):
     path = path[1:]
     path = '-'.join(path.split(os.sep))
 
+    # override path with name if it exists
+    name = data.get(f'{META}_{NAME}', '')
+    if name:
+        path = name
+
     prefix = data.get(f'{META}_{PREFIX}', '')
     if prefix:
         path = f'{"_".join(prefix.split())}{SPLIT}{path}'
-    
+
     path = path[:255]
     args = f'{path} {args}'
 

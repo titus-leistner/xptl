@@ -62,11 +62,11 @@ INPUT is the path to your ini-file or a directory containing ini-files. BATCH_CM
 
 Using the script on our exemplary directory of ini-files runs the following commands:
 ```sh
-sbatch -J L1_Experiment%training_learning_rate=0.01%training_batch_size=128%training_loss=L1 job.sh L1_Experiment%training_learning_rate=0.01%training_batch_size=128%training_loss=L1  --training_learning_rate=0.01 --training_batch_size=128 --training_loss=L1
+sbatch -J L1_Experiment-training_learning_rate=0.01-training_batch_size=128-training_loss=L1 job.sh L1_Experiment-training_learning_rate=0.01-training_batch_size=128-training_loss=L1  --training_learning_rate=0.01 --training_batch_size=128 --training_loss=L1
 
-sbatch -J MSE_Experiment%training_learning_rate=0.0001%training_batch_size=128%training_loss=MSE job.sh MSE_Experiment%training_learning_rate=0.0001%training_batch_size=128%training_loss=MSE  --training_learning_rate=0.0001 --training_batch_size=128 --training_loss=MSE
+sbatch -J MSE_Experiment-training_learning_rate=0.0001-training_batch_size=128-training_loss=MSE job.sh MSE_Experiment-training_learning_rate=0.0001-training_batch_size=128-training_loss=MSE  --training_learning_rate=0.0001 --training_batch_size=128 --training_loss=MSE
 ```
-The script generates a job name, containing all parameters without spaces. Optionally a prefix to this jobname can be defined as `prefix` in the `[meta]` section. The `-J` argument passes this name to your scheduler.
+The script generates a job name, either defined as `name` in the `[meta]` section, or containing all parameters without spaces. Optionally a prefix to this jobname can be defined as `prefix` in the `[meta]` section. The `-J` argument passes this name to your scheduler.
 It is also passed to your job script as a first argument followed by all other hyperparameters as additional arguments.
 
 An exemplary job file could look like this:
