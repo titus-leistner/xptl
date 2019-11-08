@@ -133,7 +133,7 @@ def main():
 
     # plot graphs
     color = 1
-    step = max(1, len(x_axis) // canvas.cols * 4)
+    step = max(1, len(x_axis) // w)
     for axis in y_axes:
         for i in range(0, len(axis) - step, step):
             x1, y1 = normalize(x_axis[i], axis[i])
