@@ -140,10 +140,6 @@ def main():
             x2, y2 = normalize(x_axis[i + step], axis[i + step])
             canvas.line(x1, y1, x2, y2, color)
 
-        # close graph to maximum x
-        x1, y1 = normalize(x_axis[-1], axis[-1])
-        canvas.line(x1, y1, x2, y2, color)
-
         color += 1
 
     # print axis numbers
