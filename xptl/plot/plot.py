@@ -5,11 +5,13 @@ import math
 from .canvas import Canvas
 
 usage = """
-Usage: xptl-plot INPUT [COLUMNS]
+Usage: xptl-plot INPUT [COLUMNS] [SMA]
 
 INPUT       csv-file with one header line followed by comma-separated floats
 
 COLUMNS     comma-separated list of y-columns csv-file to plot. E.g. 2,4,5
+
+SMA         number of lines to take into account for Simple Moving Average. Default is 1 for no SMA.
 """
 
 
@@ -63,6 +65,10 @@ def main():
     if len(sys.argv) > 2:
         cols = sys.argv[2]
 
+    sma = 1
+    if len(sys.argv) > 3:
+        sma = int(sys.argv[3])
+
     data = []
     headers = []
     split = None
@@ -100,6 +106,17 @@ def main():
 
         y_axes = [y_axes[i] for i in cols]
         headers = [headers[i] for i in cols]
+
+    # compute simple moving average
+    for axis in y_axes:
+        for x, v in enumerate(axis):
+            n = min(x + 1, sma)
+
+            mean = 0.0
+            for i in range(n):
+                mean += axis[x - i]
+            mean /= float(n)
+            axis[x] = mean
 
     # get data interval
     x_min = min(x_axis)
