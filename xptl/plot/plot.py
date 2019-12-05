@@ -122,8 +122,10 @@ def main():
     x_min = min(x_axis)
     x_max = max(x_axis)
 
-    y_min = min(min(y_axes))
-    y_max = max(max(y_axes))
+    print(len(y_axes))
+
+    y_min = min(min(a) for a in y_axes)
+    y_max = max(max(a) for a in y_axes)
 
     def normalize(x, y):
         """
