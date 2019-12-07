@@ -82,7 +82,7 @@ def parse_args(data):
     for k, v in data.items():
         if k.startswith(f'{META}_'):
             continue
-        if isinstance(v, bool):
+        if isinstance(eval(v), bool):
             if v:
                 args += f' --{k}'
                 path += f';{k}'
