@@ -91,7 +91,7 @@ def parse_args(data):
             is_bool = False
 
         if is_bool:
-            if v:
+            if eval(v):
                 args += f' --{k}'
                 path += f';{k}'
         elif True in [c in v for c in string.whitespace]:
