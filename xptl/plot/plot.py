@@ -186,9 +186,9 @@ def main():
         (canvas.pixel_map[1][0] | canvas.pixel_map[1][1]) + canvas.offset)
     vertical += chr(canvas.pixel_map[1][0] + canvas.offset)
 
-    print(f'x-axis: {x_header}   y-axis: ', end='')
+    print(f'x-axis: {x_header.strip()}   y-axis: ', end='')
     for header in headers:
-        print(f'{canvas.color_map[color]}{vertical}{header}    ', end='')
+        print(f'{canvas.color_map[color]}{vertical}{header.strip()}    ', end='')
         color += 1
     print(canvas.color_map[0])
 
