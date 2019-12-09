@@ -87,7 +87,7 @@ def parse_args(data):
         try:
             if isinstance(eval(v), bool):
                 is_bool = True
-        except SyntaxError:
+        except Exception:
             is_bool = False
 
         if is_bool:
