@@ -122,8 +122,6 @@ def main():
     x_min = min(x_axis)
     x_max = max(x_axis)
 
-    print(len(y_axes))
-
     y_min = min(min(a) for a in y_axes)
     y_max = max(max(a) for a in y_axes)
 
