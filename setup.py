@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='xptl',
-    version='0.3.11',
+    version='0.3.12',
     author="Titus Leistner",
     author_email='research@titus-leistner.de',
     classifiers=[

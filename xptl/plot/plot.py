@@ -186,7 +186,8 @@ def main():
 
     print(f'x-axis: {x_header.strip()}   y-axis: ', end='')
     for header in headers:
-        print(f'{canvas.color_map[color]}{vertical}{header.strip()}    ', end='')
+        print(f'{canvas.color_map[color % 15]}{vertical}{header.strip()}    ',
+              end='')
         color += 1
     print(canvas.color_map[0])
 
